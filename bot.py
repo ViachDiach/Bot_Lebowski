@@ -7,7 +7,7 @@ import os
 
 from discord_try import try_bot
 from sinoptik import pogoda, lazyjob
-from discord_try import mat, codwars, dushnila, total, check
+from discord_try import mat, codwars, dushnila, total, check, trade
 from embeds import style
 
 bot = commands.Bot(command_prefix='$')
@@ -126,7 +126,7 @@ async def stuffy(ctx, victim=''):
 
     if dushno == 'Уже взвешен':
         name = 'А вот все'
-        report = (f'Ты уже вычеслен')
+        report = (f'Ты уже в строю')
     else:
         name = 'На сколько % ты душный сегодня?'
         report = (f'🤓 Ты сегодня душный на {dushno} %🤓')
@@ -154,11 +154,15 @@ async def swap(ctx, victim):
     if response.channel == ctx.channel:
         if response.component.label == 'That turns me on':
             await response.respond(content='🤵 Ganging up 🤵')
-
+            swapstart = trade(who, whom)
+            name = 'Посмотрите на этих двух'
+            report = ('Обменялись трусиками 🩳 🩲')
+            type = await style(name, report)
+            await ctx.send(embed=type)
         else:
             await response.respond(content='Оh sh"t im sorry 😞')
             name = 'Садись в угол с гречкой, ты  сегодня'
-            report = ('Фуфло явное')
+            report = ('💩 Фуфло 🤢 явное 🤮')
             type = await style(name, report)
             await ctx.send(victim, embed=type)
 

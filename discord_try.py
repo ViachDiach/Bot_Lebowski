@@ -1,20 +1,24 @@
 import requests
 import random
 
-database = []
-equel = []
+database, equel = [], []
+id, iam = [], []
+
+
+
+def trade(who, whom):
+    equel[database.index(who)], equel[database.index(whom)] = equel[database.index(whom)], equel[database.index(who)]
+    iam[id.index(who)], iam[id.index(whom)] = iam[id.index(whom)], iam[id.index(who)]
 
 def check(teg):
     if teg in database:
-        print(equel[database.index(teg)])
         return(equel[database.index(teg)])
     else:
         return('нужно провериться')
 
+
 def dushnila(teg):
     procent = random.randrange(0, 100)
-
-    print(teg)
 
     if teg in database:
         return('Уже взвешен')
@@ -56,6 +60,36 @@ async def try_bot():
     return cut_str(open_resp)
 
 
+
+def mat(review):
+
+    low = ['лучик солнца', 'милашка', 'прелесть', 'снежинка', 'умничка', 'пушок', 'лапочка', 'крошка', 'ягодка',
+            'персик', 'конфетка', 'ангелочек', 'светлячок', 'птенчик', 'мурлыка', 'котенок', 'киса', 'умница']
+
+    mid = ['хвойда', 'шльондра', 'курва', 'курвенний', 'шльодравий', 'хвойдяний', 'курвар', 'шльондер', 'хвойдник',
+            'курварство', 'піхва', 'потка', 'піхвяний', 'піхвистий', 'спіхварити', 'вигнанець', 'грайня', 'алкомэн',
+            'гейропеец', 'довбограник', 'награйка', 'прутень',  'прутня', 'прутнелиз', 'прутнявий',
+           'three hundred bucks', 'cum ', 'dungeon master', 'boss of this gym', 'fucking slave', 'suck some dick',
+           'чешский разбойник', 'балабоk', 'рохля', 'пузырь', 'любопытный', 'вошь', 'бісова ковінька', 'булька з носа',
+           'пришелепкуватий', 'шмаркач', 'тюхтій', 'нездара', 'дурепа', 'йолоп', 'боров', 'быдло',  'пустобрех', 'вшивота',
+           'трутень', 'лепешка', 'обалдуй', 'погань', 'профурсетка', 'хабалка', 'хмырь', 'shit',  'bastard', 'cunt',
+           'motherfucker', 'fucking ass', 'slut', 'dumbass', 'бикукле', 'бикуля', 'рередикт']
+
+    high = ['фуфло', 'душный козел', 'свиняче рило', 'підорко', 'обезьяна', 'шушера', 'sucker', 'son of a bitch',
+             'желчный', 'бобик', 'loser', 'конь педальный', 'геморрой', 'шелупонь', 'пердун']
+
+    if review in range(0, 41):
+        lst = low
+    elif review in range(41, 71):
+        lst = mid
+    else:
+        lst = high
+
+    today = lst[random.randint(0, len(lst))]
+
+    return today
+
+
 async def codwars(massage):
 
     response = requests.get(f'https://www.codewars.com/api/v1/users/{massage}')
@@ -92,31 +126,8 @@ async def codwars(massage):
         return (progress)
 
 
-def mat(review):
 
-    low = ['лучик солнца', 'милашка', 'прелесть', 'снежинка', 'умничка', 'пушок', 'лапочка', 'крошка', 'ягодка',
-            'персик', 'конфетка', 'ангелочек', 'светлячок', 'птенчик', 'мурлыка', 'котенок', 'киса', 'умница']
 
-    mid = ['хвойда', 'шльондра', 'курва', 'курвенний', 'шльодравий', 'хвойдяний', 'курвар', 'шльондер', 'хвойдник',
-            'курварство', 'піхва', 'потка', 'піхвяний', 'піхвистий', 'спіхварити', 'вигнанець', 'грайня', 'алкомэн',
-            'гейропеец', 'довбограник', 'награйка', 'прутень',  'прутня', 'прутнелиз', 'прутнявий',
-           'three hundred bucks', 'cum ', 'dungeon master', 'boss of this gym', 'fucking slave', 'suck some dick',
-           'чешский разбойник', 'балабоk', 'рохля', 'пузырь', 'любопытный', 'вошь', 'бісова ковінька', 'булька з носа',
-           'пришелепкуватий', 'шмаркач', 'тюхтій', 'нездара', 'дурепа', 'йолоп', 'боров', 'быдло',  'пустобрех', 'вшивота',
-           'трутень', 'лепешка', 'обалдуй', 'погань', 'профурсетка', 'хабалка', 'хмырь', 'shit',  'bastard', 'cunt',
-           'motherfucker', 'fucking ass', 'slut', 'dumbass', 'бикукле', 'бикуля', 'рередикт']
 
-    high = ['фуфло', 'душный козел', 'свиняче рило', 'підорко', 'обезьяна', 'шушера', 'sucker', 'son of a bitch',
-             'желчный', 'бобик', 'loser', 'конь педальный', 'геморрой', 'шелупонь', 'пердун']
-
-    if review in range(0, 41):
-        lst = low
-    elif review in range(41, 71):
-        lst = mid
-    else:
-        lst = high
-
-    today = lst[random.randint(0, len(lst))]
-    return today
 
 
