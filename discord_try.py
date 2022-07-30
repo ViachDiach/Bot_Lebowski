@@ -1,14 +1,17 @@
 import requests
 import random
 
-database, equel = [], []
-id, iam = [], []
-
+database, equel, iam = [], [], []
 
 
 def trade(who, whom):
     equel[database.index(who)], equel[database.index(whom)] = equel[database.index(whom)], equel[database.index(who)]
-    iam[id.index(who)], iam[id.index(whom)] = iam[id.index(whom)], iam[id.index(who)]
+    iam[database.index(who)], iam[database.index(whom)]  = iam[database.index(whom)], iam[database.index(who)]
+
+
+def update(teg):
+    iam[database.index(teg)] = 'Фуфло явное'
+
 
 def check(teg):
     if teg in database:
@@ -28,6 +31,7 @@ def dushnila(teg):
             print()
         else:
             database.append(teg)
+            iam.append('еще не использовал $zamat')
 
         return procent
 
@@ -36,7 +40,9 @@ def total():
     step, answer = [], ('')
 
     for i in range(len(database)):
-        step.append(f'{database[i]} душный на {equel[i]} %')
+        user, summary =  database[i], equel[i]
+        name = iam[database.index(user)]
+        step.append(f'{user} душный на {summary} % и ты сегодня {name}')
     for j in step:
         answer += str(j)
         answer += '\n'
@@ -60,8 +66,7 @@ async def try_bot():
     return cut_str(open_resp)
 
 
-
-def mat(review):
+def mat(review, teg):
 
     low = ['лучик солнца', 'милашка', 'прелесть', 'снежинка', 'умничка', 'пушок', 'лапочка', 'крошка', 'ягодка',
             'персик', 'конфетка', 'ангелочек', 'светлячок', 'птенчик', 'мурлыка', 'котенок', 'киса', 'умница']
@@ -87,7 +92,18 @@ def mat(review):
 
     today = lst[random.randint(0, len(lst))]
 
-    return today
+
+    if iam[database.index(teg)] != 'еще не использовал $zamat':
+        print(iam[database.index(teg)])
+        return('Уже обозвали')
+    else:
+        iam[database.index(teg)] = today
+        # if teg in database:
+        #     print()
+        # else:
+        #     database.append(teg)
+        #     iam.append('')
+        return today
 
 
 async def codwars(massage):

@@ -7,7 +7,7 @@ import os
 
 from discord_try import try_bot
 from sinoptik import pogoda, lazyjob
-from discord_try import mat, codwars, dushnila, total, check, trade
+from discord_try import mat, codwars, dushnila, total, check, trade, update
 from embeds import style
 
 bot = commands.Bot(command_prefix='$')
@@ -58,19 +58,17 @@ async def zamat(ctx, victim=''):       # обзывалка
         type = await style(name, report)
         await ctx.send(teg, embed=type)
     else:
-        xyi = mat(review)                     # проеряем кто он согласно процентам
-        name = 'Ты сегодня... 🤔'
-        report = xyi
+        xyi = mat(review, teg)                     # проеряем кто он согласно процентам
+
+        if xyi == 'Уже обозвали':
+            name = 'А вот все'
+            report = ('Ты уже в строю')
+        else:
+            name = 'Ты сегодня... 🤔'
+            report = xyi
+
         type = await style(name, report)
         await ctx.send(teg, embed=type)
-
-
-    # xyi = mat()                      # проеряем кто он согласно процентам
-    # name = 'Ты сегодня... 🤔'
-    # report = xyi
-    #
-    # type = await style(name, report)
-    # await ctx.send(teg, embed=type)
 
 
 @bot.command()      # ебзделушка
@@ -163,6 +161,7 @@ async def swap(ctx, victim):
             await response.respond(content='Оh sh"t im sorry 😞')
             name = 'Садись в угол с гречкой, ты  сегодня'
             report = ('💩 Фуфло 🤢 явное 🤮')
+            loh = update(victim)
             type = await style(name, report)
             await ctx.send(victim, embed=type)
 
