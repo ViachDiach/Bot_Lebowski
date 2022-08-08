@@ -183,6 +183,6 @@ def restart():
 
 
 
-token = 'OTgwMzc3MzExODAxMTQ3NDE0.GvucPd.fCMg47vD4EgETPmLoqI7t4MOkIfFiqMp5WbQis'
+token = ''
 
 bot.run(token)
