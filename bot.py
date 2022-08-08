@@ -1,13 +1,14 @@
 import discord
 from discord.ext import commands
 from discord_components import DiscordComponents, Button, ButtonStyle
+import schedule
 import asyncio
 import time
 import os
 
 from discord_try import try_bot
-from sinoptik import pogoda, lazyjob
-from discord_try import mat, codwars, dushnila, total, check, trade, update
+from sinoptik import pogoda
+from discord_try import mat, codwars, dushnila, total, check, trade, update, sweep
 from embeds import style
 
 bot = commands.Bot(command_prefix='$')
@@ -24,7 +25,7 @@ async def use(ctx):     # список всех команд
     name = 'Мои команды:'
     report = '\n$weather ⛅ - погода в любом городе\n$money 💸 - курс ценных бумаг\n$skills 🖥️ - boss of the CodeWars' \
              '\n$puke 💨👃 - Слава не рыгун\n$zamat 🔞 - хто ты сьогоднi\n$stuffy 🤓 - На сколько % ты душный' \
-             '\n$swap 🔄  - обменяться % душноты'
+             '\n$swap 🔄  - обменяться % душноты\n$list 📃 - узнать кто есть кто'
 
     type = await style(name, report)
     await ctx.send(embed=type)
@@ -103,14 +104,6 @@ async def skills(ctx, *, massage):
     await ctx.send(author.mention, embed=type)
 
 
-# @bot.command()
-# async def work(ctx, *, massage):    # кто чем занят (парсинг из графаны)
-#
-#     job = await lazyjob(massage)
-#     author = ctx.message.author
-#     await ctx.send(f'{author.mention}, {job}')
-
-
 @bot.command()
 async def stuffy(ctx, victim=''):
     author = ctx.message.author
@@ -174,6 +167,22 @@ async def list(ctx):
     await ctx.send(spisok)
 
 
-token = ''
+@bot.command()
+async def clear(ctx):
+    make = sweep()
+    await ctx.send(make)
+    print(make)
+
+
+def restart():
+    schedule.every(1).minutes.do(clear)
+    # schedule.every(6).hour.do(clear)
+    while True:
+        schedule.run_pending()
+ 
+
+
+
+token = 'OTgwMzc3MzExODAxMTQ3NDE0.GvucPd.fCMg47vD4EgETPmLoqI7t4MOkIfFiqMp5WbQis'
 
 bot.run(token)

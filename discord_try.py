@@ -98,11 +98,6 @@ def mat(review, teg):
         return('Уже обозвали')
     else:
         iam[database.index(teg)] = today
-        # if teg in database:
-        #     print()
-        # else:
-        #     database.append(teg)
-        #     iam.append('')
         return today
 
 
@@ -142,8 +137,11 @@ async def codwars(massage):
         return (progress)
 
 
+async def sweep():
+    database.clear()
+    equel.clear()
+    iam.clear()
 
-
-
+    return ('Я все забыл ⏰')
 
 

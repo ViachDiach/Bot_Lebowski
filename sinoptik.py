@@ -2,10 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 
 
-
 async def pogoda(massage):
 
-    massage = massage.lower()
+    massage = massage.lower().replace(' ', '-')
     city = massage.title()
 
     response = requests.get(f'https://sinoptik.ua/погода-{massage}')
